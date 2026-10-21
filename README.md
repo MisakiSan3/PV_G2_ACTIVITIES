@@ -1,1 +1,2 @@
 # PV_G2_ACTIVITIES
+- Actividad 1 : tema-1.2 -> FIRST_ACTIVITY
