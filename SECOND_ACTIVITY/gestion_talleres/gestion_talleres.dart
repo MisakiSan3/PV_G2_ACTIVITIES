@@ -105,7 +105,7 @@ void main() {
     'Flutter inicial',
     'Dart desde cero',
     'Diseño UX',
-    'Flutter inicial', // repetido a propósito: List permite duplicados
+    'Flutter inicial',
   ];
 
   Map<String, int> cuposPorTaller = {
@@ -119,7 +119,7 @@ void main() {
     'Ana',
     'Luis',
     'Marta',
-    'Ana', // repetido a propósito: Set conserva solo valores únicos
+    'Ana',
   };
 
   bool inscripcionesAbiertas = true;
