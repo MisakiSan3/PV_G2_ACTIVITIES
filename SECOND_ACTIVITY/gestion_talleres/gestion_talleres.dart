@@ -1,12 +1,22 @@
+// gestion_talleres.dart
+// Reto grupal - UNIBE Ecuador · Aplicaciones móviles con Flutter
+// Programa de consola integrado (Actividades A-F).
+// Ejecutar con: dart run gestion_talleres.dart
+
+// ===========================================================================
+// FUNCIONES
+// ===========================================================================
+
+// ---------------------------------------------------------------------------
 // Actividad C — Funciones y parámetros
+// ---------------------------------------------------------------------------
 
-
-
+/// No devuelve valor (void): solo imprime.
 void mostrarEncabezado(String universidad) {
   print('--- Talleres de $universidad ---');
 }
 
-
+/// Devuelve el cupo del taller, o 0 si el taller no existe.
 int obtenerCupo(
   Map<String, int> cupos,
   String nombreTaller,
@@ -14,12 +24,13 @@ int obtenerCupo(
   return cupos[nombreTaller] ?? 0;
 }
 
-
+/// Devuelve true solo si hay inscripciones abiertas Y cupos disponibles.
 bool puedeInscribirse(bool inscripcionesAbiertas, int cuposDisponibles) {
   return inscripcionesAbiertas && cuposDisponibles > 0;
 }
 
-
+/// Parámetros nombrados: taller y cupos son obligatorios (required);
+/// incluirDetalle es opcional y vale true por defecto.
 String crearResumen({
   required String taller,
   required int cupos,
@@ -31,11 +42,14 @@ String crearResumen({
   return taller;
 }
 
-
+// ---------------------------------------------------------------------------
 // Actividad E — Regla de negocio
+// ---------------------------------------------------------------------------
 
-
-
+/// Intenta registrar a [nombre] en el Set [participantes].
+/// Rechaza si: el nombre está vacío, las inscripciones están cerradas,
+/// no hay cupos disponibles o la persona ya está registrada.
+/// Si todo es válido, la agrega al Set y devuelve un mensaje explicativo.
 String registrarParticipante(
   String nombre,
   Set<String> participantes,
@@ -62,9 +76,9 @@ String registrarParticipante(
       'Total de participantes: ${participantes.length}.';
 }
 
-
+// ---------------------------------------------------------------------------
 // Utilidad para las pruebas (Actividad F)
-
+// ---------------------------------------------------------------------------
 
 int _pruebasOk = 0;
 int _pruebasTotal = 0;
@@ -79,14 +93,19 @@ void probar(int numero, String caso, Object esperado, Object real) {
   print('   Resultado: ${ok ? "OK" : "FALLÓ"}');
 }
 
+// ===========================================================================
+// PROGRAMA PRINCIPAL
+// ===========================================================================
 
 void main() {
-  
+  // =========================================================================
+  // Datos iniciales obligatorios (sección 3 de la guía)
+  // =========================================================================
   List<String> talleres = [
     'Flutter inicial',
     'Dart desde cero',
     'Diseño UX',
-    'Flutter inicial', 
+    'Flutter inicial', // repetido a propósito: List permite duplicados
   ];
 
   Map<String, int> cuposPorTaller = {
@@ -95,18 +114,20 @@ void main() {
     'Diseño UX': 15,
   };
 
-  
+  // ignore: equal_elements_in_set
   Set<String> participantesRegistrados = {
     'Ana',
     'Luis',
     'Marta',
-    'Ana', 
+    'Ana', // repetido a propósito: Set conserva solo valores únicos
   };
 
   bool inscripcionesAbiertas = true;
   String nombreUniversidad = 'UNIBE';
 
-  //  Actividad A — Variables y tipos 
+  // =========================================================================
+  // Actividad A — Variables y tipos
+  // =========================================================================
   String universidad = nombreUniversidad;
   String tallerSeleccionado = 'Flutter inicial';
   int cupos = cuposPorTaller[tallerSeleccionado] ?? 0;
@@ -124,7 +145,9 @@ void main() {
   print('  int    -> número entero: aquí, la cantidad de cupos del taller.');
   print('  bool   -> verdadero o falso: aquí, si las inscripciones están abiertas.');
 
-  // Actividad B — List, Map y Set 
+  // =========================================================================
+  // Actividad B — List, Map y Set
+  // =========================================================================
   print('');
   print('--- Actividad B: List, Map y Set ---');
   print('Talleres almacenados en la lista:');
@@ -140,7 +163,9 @@ void main() {
   print('  El Set solo guarda valores únicos y descarta los que ya contiene '
       '(por eso "Ana" cuenta 1 sola vez).');
 
+  // =========================================================================
   // Actividad C — Funciones y parámetros
+  // =========================================================================
   print('');
   print('--- Actividad C: Funciones y parámetros ---');
   print('Cupo de "Flutter inicial": '
@@ -158,7 +183,9 @@ void main() {
   print('Posicional: se identifica por su orden. Nombrado: va entre {} y se '
       'pasa con su nombre. required obliga a pasar el parámetro nombrado.');
 
-  // Actividad D — Iterables y filtrado 
+  // =========================================================================
+  // Actividad D — Iterables y filtrado
+  // =========================================================================
   print('');
   print('--- Actividad D: Iterables y filtrado ---');
   Iterable<String> talleresFlutter =
@@ -177,7 +204,9 @@ void main() {
   print('La variable puede ser Iterable<String> porque where devuelve un '
       'Iterable, no una List; List es un tipo de Iterable.');
 
-  // Actividad E — Regla de negocio 
+  // =========================================================================
+  // Actividad E — Regla de negocio
+  // =========================================================================
   print('');
   print('--- Actividad E: Regla de negocio ---');
   int cuposFlutter = obtenerCupo(cuposPorTaller, 'Flutter inicial');
@@ -191,11 +220,13 @@ void main() {
       'Pedro', participantesRegistrados, inscripcionesAbiertas, 0));
   print('Participantes al final: $participantesRegistrados');
 
-  // Actividad F — Pruebas (esperado vs real) 
+  // =========================================================================
+  // Actividad F — Pruebas (esperado vs real)
+  // =========================================================================
   print('');
   print('--- Actividad F: Casos de prueba ---');
 
-  
+  // Copia del Set para que las pruebas no alteren los datos anteriores.
   final participantesPrueba = <String>{'Ana', 'Luis', 'Marta'};
 
   probar(1, 'Consultar taller existente (Flutter inicial)', 20,
