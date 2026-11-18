@@ -106,7 +106,13 @@ class _CounterScreenState extends State<CounterScreen> {
 
               const SizedBox(height: 20),
 
-             
+               // TOTAL
+              const TotalButton(),
+
+              const SizedBox(height: 10),
+
+              // RESULTADO
+              NumberInput(value: total),
 
             ],
           ),
