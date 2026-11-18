@@ -87,8 +87,19 @@ class _CounterScreenState extends State<CounterScreen> {
 
               Row(
                 children: [
-                  
+                  Expanded(
+                    child: NumberInput(value: restados),
+                  ),
 
+                  CounterButton(
+                    icon: Icons.remove_circle_outline,
+                    onPressed: () {
+                      setState(() {
+                        restados++;
+                      });
+                    },
+                  ),
+                  
                   //button
                 ],
               ),
