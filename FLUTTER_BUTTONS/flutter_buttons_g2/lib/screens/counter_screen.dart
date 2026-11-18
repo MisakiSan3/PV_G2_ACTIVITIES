@@ -37,17 +37,50 @@ class _CounterScreenState extends State<CounterScreen> {
             children: [
 
               // SUMAR
-              const Text('Número de clicks +'),
+              const Text(
+                'Número de clicks +',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              const SizedBox(height: 8),
 
               Row(
                 children: [
-                  
-
-                  //button
+                  const SizedBox(width: 64),
+                  Expanded(
+                    child: NumberInput(value: sumados),
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    width: 52,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 136, 240, 87),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 0, 0, 0),
+                        width: 1.5,
+                      ),
+                    ),
+                    child: IconTheme(
+                      data: IconThemeData(color: const Color.fromARGB(255, 255, 255, 255)),
+                      child: CounterButton(
+                        icon: Icons.add,
+                        onPressed: () {
+                          setState(() {
+                            sumados++;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               // RESTAR
               const Text('Número de clicks -'),
